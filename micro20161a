@@ -1,14 +1,13 @@
 # micro20161a
-
 int value = 0;            // Seri portan göndereceği değer 
-int last_switch1 = 0;  // Anahtarlama yapabilmek için gerekli olan değişkenler
-int last_switch2 = 0;
-int last_switch3 = 0;
-int last_switch4 = 0;
-int last_switch5 = 0;
-int last_switch6 = 0;
-int last_switch7 = 0;
-int last_switch8 = 0;
+int switch1 = 0;  // Anahtarlama yapabilmek için gerekli olan değişkenler
+int switch2 = 0;
+int switch3 = 0;
+int switch4 = 0;
+int switch5 = 0;
+int switch6 = 0;
+int switch7 = 0;
+int switch8 = 0;
 int switch_a=0;
 
 char gelen_veri;
@@ -32,3 +31,25 @@ Serial.println("Program Basladi");
 
 }
 
+void loop() {
+  // put your main code here, to run repeatedly:
+
+
+while(Serial.available() > 0)
+{
+    gelen_veri=Serial.read();
+    if(gelen_veri=='B' && sira==0)sira++;//sira sira BASLA KELİMESİ KONTROL EDİLİYOR
+    else if(gelen_veri=='A' && sira==1)sira++;
+    else if(gelen_veri=='S' && sira==2)sira++;
+    else if(gelen_veri=='L' && sira==3)sira++;
+    else if(gelen_veri=='A' && sira==4)
+    {basla=true; sira=0;}
+    else
+    {
+      sira=0;//eğer sıranın dışında gelirse sıra başa döner mesala BASH gelirse tekrar BASLA yazılması
+    }          }
+ if(basla==true){switch_a = digitalRead(2)|(digitalRead(3)<< 1)|(digitalRead(4)<< 2)|(digitalRead(5)<< 3)|(digitalRead(6)<< 4)|(digitalRead(7)<< 5)|(digitalRead(8)<< 6)|(digitalRead(9)<< 7) ;//port okunuyor 
+
+ analogWrite(10,switch_a);
+ Serial.println(switch_a);//switchlerden okunan değer yazılıyo
+                 delay(10);}}
